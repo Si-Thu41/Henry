@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>A Letter Written in Songs</title><style>:root {
+      --bg1: #130b16;
+      --bg2: #321525;
+      --card: rgba(255, 255, 255, 0.09);
+      --card-strong: rgba(255, 255, 255, 0.14);
+      --text: #fff7f9;
+      --muted: #e9cfd7;
+      --accent: #ffb7c8;
+      --accent2: #f8e3a1;
+      --spotify: #1DB954;
+      --line: rgba(255,255,255,0.18);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(255,183,200,0.28), transparent 35%),
+        radial-gradient(circle at 85% 20%, rgba(248,227,161,0.18), transparent 30%),
+        linear-gradient(145deg, var(--bg1), var(--bg2) 55%, #1d1027);
+      min-height: 100vh;
+    }
+
+    .stars {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(#ffffff66 1px, transparent 1px),
+        radial-gradient(#ffffff35 1px, transparent 1px);
+      background-size: 60px 60px, 110px 110px;
+      background-position: 0 0, 30px 40px;
+      opacity: 0.4;
+    }
+
+    .wrap {
+      width: min(920px, 92vw);
+      margin: 0 auto;
+      padding: 56px 0 80px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+    }
+
+    .hero-card, .section, .playlist, .secret {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-card {
+      padding: clamp(32px, 7vw, 72px);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 8vw, 5.2rem);
+      line-height: 1.02;
+      margin: 0 0 18px;
+      letter-spacing: -0.04em;
+    }
+
+    h2 {
+      font-size: clamp(1.45rem, 4vw, 2.2rem);
+      margin: 0 0 18px;
+    }
+
+    .welcome-label {
+      text-transform: uppercase;
+      letter-spacing: 0.34em;
+      font-size: 0.82rem;
+      color: var(--accent2);
+      margin-bottom: 18px;
+      font-family: Arial, sans-serif;
+    }
+
+    .quote {
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2.6vw, 1.35rem);
+      line-height: 1.8;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .down {
+      display: inline-block;
+      margin-top: 36px;
+      color: var(--text);
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    .songs { display: grid; gap: 22px; }
+
+    .section {
+      padding: clamp(24px, 5vw, 42px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: '';
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: linear-gradient(var(--accent), var(--accent2));
+      opacity: 0.8;
+    }
+
+    .section p, .playlist p, .secret p {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line), transparent);
+      margin: 34px 0;
+    }
+
+    .playlist {
+      margin-top: 44px;
+      padding: clamp(26px, 5vw, 46px);
+    }
+
+    .playlist-list {
+      list-style: none;
+      padding: 0;
+      margin: 26px 0 0;
+      display: grid;
+      gap: 14px;
+    }
+
+    .playlist-list a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px 18px;
+      transition: transform 0.2s ease, background 0.2s ease;
+      font-family: Arial, sans-serif;
+    }
+
+    .playlist-list a:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.18);
+    }
+
+    .listen {
+      color: var(--spotify);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .final-page, .secret { text-align: center; }
+
+    .final-page { margin-top: 44px; }
+
+    .secret {
+      margin-top: 44px;
+      padding: clamp(28px, 6vw, 54px);
+    }
+
+    .fade-lines p {
+      margin: 22px 0;
+      animation: appear 1s ease both;
+    }
+
+    .fade-lines p:nth-child(1) { animation-delay: .2s; }
+    .fade-lines p:nth-child(2) { animation-delay: .8s; }
+    .fade-lines p:nth-child(3) { animation-delay: 1.4s; }
+    .fade-lines p:nth-child(4) { animation-delay: 2s; }
+    .fade-lines p:nth-child(5) { animation-delay: 2.6s; }
+    .fade-lines p:nth-child(6) { animation-delay: 3.2s; }
+
+    @keyframes appear {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      font-size: 2.4rem;
+      margin: 26px 0;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.12);
+      color: var(--text);
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-family: Arial, sans-serif;
+      text-decoration: none;
+      cursor: default;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, #ffb7c8, #f8e3a1);
+      color: #2a1020;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      color: rgba(255,255,255,0.55);
+      font-family: Arial, sans-serif;
+      font-size: 0.86rem;
+      margin-top: 44px;
+    }
+
+    .reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 1.5s ease,
+    transform 1.5s ease;
+}
+
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+    @media (max-width: 560px) {
+      .playlist-list a { align-items: flex-start; flex-direction: column; }
+      .wrap { width: min(94vw, 920px); }
+    }</style>
+
+    <script src="/script.js" defer></script>
+</head>
+<body><div class="stars"></div><main class="wrap"><section class="hero" id="top"><div class="hero-card"><div class="welcome-label">Welcome</div><h1>A Letter Written in Songs</h1><p class="quote">“There were so many things I wanted to tell you, but words never seemed enough. So I borrowed a few melodies, a few memories, and a piece of my heart. If you listen closely, you might find me between every song.”</p><a class="down" href="#songs">Begin reading</a></div></section><section class="songs" id="songs"><article class="section"><h2>1. Enchanted</h2><p>“Some people walk into your life quietly… and somehow, they become the most unforgettable part of it.”</p></article><article class="section"><h2>2. Until I Found You</h2><p>“Maybe I wasn’t looking for love. Maybe I was just looking for you.”</p></article><article class="section"><h2>3. Angel Baby</h2><p>“You made ordinary days feel like memories I would never trade for anything.”</p></article><article class="section"><h2>4. Lay All Your Love on Me</h2><p>“If love has a home, I hope one day it looks a little like us.”</p></article><article class="section"><h2>5. Running Up That Hill (A Deal with God)</h2><p>“I don’t want to win every argument. I just want to understand your heart.”</p></article><article class="section"><h2>6. Video Games</h2><p>“The best part of my favorite memories was never the place… it was always you.”</p></article><article class="section"><h2>7. Yellow</h2><p>“Some people don’t just brighten a room. They brighten a life. You never knew it, but you’ve been that person for me.”</p></article><article class="section"><h2>8. Mystery of Love</h2><p>“Not every love story is measured by time. Some are measured by the way they quietly change us.”</p></article><article class="section"><h2>9. Daylight</h2><p>“Because of you, love stopped feeling like something to fear and started feeling like somewhere I wanted to stay.”</p></article><article class="section"><h2>10. Turning Page</h2><p>“Every ending is also the beginning of a new page. I hope this is ours.”</p></article></section><section class="playlist" id="playlist"><h2> Playlist</h2><p>If you’d like to hear every chapter of this letter, here they are.</p><ol class="playlist-list"><li><a href="https://open.spotify.com/track/10eBRyImhfqVvkiVEGf0N0" target="_blank" rel="noopener noreferrer"><span>1. Enchanted — Taylor Swift</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/0T5iIrXA4p5GsubkhuBIKV" target="_blank" rel="noopener noreferrer"><span>2. Until I Found You — Stephen Sanchez</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/2m6Ko3CY1qXNNja8AlugNc" target="_blank" rel="noopener noreferrer"><span>3. Angel Baby — Troye Sivan</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/4euAGZTszWPrriggYK0HG9" target="_blank" rel="noopener noreferrer"><span>4. Lay All Your Love on Me — ABBA</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/1PtQJZVZIdWIYdARpZRDFO" target="_blank" rel="noopener noreferrer"><span>5. Running Up That Hill (A Deal with God) — Kate Bush</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/0fBSs3fRoh1yJcne77fdu9" target="_blank" rel="noopener noreferrer"><span>6. Video Games — Lana Del Rey</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/3AJwUDP919kvQ9QcozQPxg" target="_blank" rel="noopener noreferrer"><span>7. Yellow — Coldplay</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/0MNNKSUU9OOQ8DSGWduw79" target="_blank" rel="noopener noreferrer"><span>8. Mystery of Love — Sufjan Stevens</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/1fzAuUVbzlhZ1lJAx9PtY6" target="_blank" rel="noopener noreferrer"><span>9. Daylight — Taylor Swift</span><span class="listen">Listen on Spotify</span></a></li><li><a href="https://open.spotify.com/track/2kfGoV9a5dbSKCNmUWH2ZF" target="_blank" rel="noopener noreferrer"><span>10. Turning Page — Sleeping At Last</span><span class="listen">Listen on Spotify</span></a></li></ol></section><section class="section final-page"><h2> Final Page</h2><p>“This isn’t a playlist. It isn’t even a website. It’s simply the closest thing I could make to show you what my heart has been trying to say all this time.”</p></section>
+  
+  <section class="secret">
+  <h2>One Last Thing</h2>
+
+  <p class="reveal">
+    Sometimes, the most beautiful feelings are the ones we cannot say directly.
+  </p>
+
+  <p class="reveal">
+    So I placed them here, between songs, memories, and quiet little moments.
+  </p>
+
+  <p class="reveal">
+    If this letter made you smile, even just a little, then it already meant something to me.
+  </p>
+
+  <div class="heart reveal"></div>
+
+  <h2 class="reveal">
+    Would you let me be part of your story?
+  </h2>
+
+  <div class="buttons reveal">
+    <button class="btn primary">Yes</button>
+    <button class="btn">I'd like to know you better first</button>
+  </div>
+  
+</section>
+<script>
+  const section = document.querySelector(".secret");
+const items = section.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    if (!entries[0].isIntersecting) return;
+
+    items.forEach((item, index) => {
+      setTimeout(() => {
+        item.classList.add("show");
+      }, index * 1500);
+    });
+
+    observer.unobserve(section);
+  },
+  {
+    threshold: 0.4
+  }
+);
+
+observer.observe(section);
+</script>
+</main>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "henry",
+  "version": "1.0.0",
+  "description": "For crush",
+  "license": "ISC",
+  "author": "si thu",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
